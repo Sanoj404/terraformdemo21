@@ -1,25 +1,27 @@
  pipeline {
     agent any
-
+    tools {
+        terraform 'terraform' 
+    }
     stages {
-        stage('Build') {
+        stage('GIT Checkout') {
             steps {
-                echo 'Building the World by Sanoj404'
+                git branch: 'main', credentialsId: 'd09c54e6-6f7d-41e9-b80d-c4a460543e82', url: 'https://github.com/Sanoj404/pipelinecraft321predemo1.git'
             }
         }    
-        stage('Test') {
+        stage('Terraform init') {
             steps {
-                echo 'Testing the World'
+                sh 'terraform init'
             }
         }    
-        stage('Deploy') {
+        stage('Terraform Plan') {
             steps {
-                echo 'Deploying the World'
+                sh 'terraform plan'
             } 
         }
-        stage('Analize') {
+        stage('Terraform Apply') {
             steps {
-                echo 'SELF'
+                sh 'terraform apply --auto-approve'
             } 
         }
     }
