@@ -11,7 +11,7 @@
         }    
         stage('Terraform init') {
             steps {
-                sh 'terraform init --auto-approve'
+                sh 'terraform init'
             }
         }    
         stage('Terraform Plan') {
